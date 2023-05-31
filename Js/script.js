@@ -1,9 +1,7 @@
 const movieNameNode = document.querySelector('#movieTitle')
 const addMovieBtn = document.querySelector('#movieBtn')
-
 const movieList = document.querySelector('#listFilms')
 
-const empty = ""
 let moviesArray = []
 
 init();
@@ -28,7 +26,6 @@ function init () {
    }
    return null;
 }
-
 function addMovieToList(e) {
    e.preventDefault();
 
@@ -43,12 +40,11 @@ function addMovieToList(e) {
    if (!movie) {
       return null;
    }
-   movieNameNode.value = empty;
+   movieNameNode.value = null;
    moviesArray.unshift(movie);
 
    localStorage.setItem('moviesArray', JSON.stringify(moviesArray));
 }
-
 function showMovieList() {
    const moviesArray = JSON.parse(localStorage.getItem('moviesArray'))
    let movieListHTML = '';
