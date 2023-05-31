@@ -1,0 +1,237 @@
+@import url(https://fonts.googleapis.com/css?family=Arimo:regular,500,600,700,italic,500italic,600italic,700italic);
+@import "nullindex";
+
+$color-background: #181818;
+$color-background-form: #232323;
+$color-background-btn: #6532F8;
+$color-background-film: #3A3939;
+$color-font: #f3f6f9;
+$color-font-opacity: rgba(243, 246, 249, 0.5);
+$color-checkbox: rgba(243, 246, 249, 0.3);
+$transition: all .4s ease;
+
+html {
+   scroll-behavior: smooth;
+}
+body {
+   margin: 0 auto;
+   font-family: 'Arimo';
+   font-size: 20px;
+   font-weight: 400;
+   color: $color-font;
+   background: $color-background;
+   overflow: hidden;
+}
+.container {
+   margin: 0 auto;
+   padding: 0 15px;
+   position: relative;
+   max-width: 960px;
+}
+
+header {
+   margin: 80px auto 0;
+   padding: 0 0 0 74px;
+   @media (max-width: 540px) {
+      padding: 0 0 0 34px;
+   }
+   @media (max-width: 428px) {
+      padding: 0 0 0 14px;
+   }
+   .header__inner {
+      display: flex;
+      flex-direction: column;
+      
+      .header__btn-wrap {
+         height: 30px;
+         display: flex;
+         font-size: 15px;
+         line-height: 17px;
+         letter-spacing: -0.04em;
+         .header__btn {
+            padding: 0 22px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            background: $color-background-btn;
+            text-transform: uppercase;
+            border: 1px solid $color-background-btn;
+            border-radius: 200px;
+         }
+      }
+      .title {
+         font-size: 120px;
+         line-height: 138px;
+         letter-spacing: -0.04em;
+         @media (max-width: 754px) {
+            font-size: 90px;
+            line-height: 103px;
+         }
+         @media (max-width: 640px) {
+            font-size: 70px;
+            line-height: 80px;
+         }
+         @media (max-width: 540px) {
+            font-size: 50px;
+            line-height: 57px;
+         }
+         @media (max-width: 428px) {
+            padding: 10px 0 0 0;
+            font-size: 30px;
+            line-height: 34px;
+         }
+      }
+   }
+}
+main {
+   height: 100%;
+   .main__inner {
+      margin: 15px 0 0 0;
+      padding: 86px 70px;
+      height: 100%;
+      background: $color-background-form;
+      border-radius: 20px;
+      @media (max-width: 640px) {
+         padding: 56px 46px;
+      }
+      @media (max-width: 540px) {
+         padding: 36px 30px;
+      }
+      @media (max-width: 428px) {
+         padding: 15px;
+      }
+      form {
+         display: flex;
+         align-items: center;
+         gap: 20px;
+         @media (max-width: 428px) {
+            gap: 0;
+            justify-content: space-between;
+         }
+         .movie__input {
+            width: 411px;
+            height: 62px;
+            font-size: 30px;
+            line-height: 34px;
+            color: $color-font-opacity;
+            background: $color-background-form;
+            border-bottom: 1px solid $color-font-opacity;
+            @media (max-width: 640px) {
+               width: 70%;
+               font-size: 25px;
+               line-height: 28px;
+            }
+            @media (max-width: 540px) {
+            }
+            @media (max-width: 428px) {
+               width: 85%;
+               height: 42px;
+               font-size: 18px;
+               line-height: 22px;
+            }
+         }
+         .input__btn {
+            width: 62px;
+            height: 62px;
+            background: url('../../Img/icon/arrow.svg') center no-repeat, $color-background-btn;
+            border-radius: 50%;
+            @media (max-width: 428px) {
+               width: 42px;
+               height: 42px;
+               background-size: 50%;
+            }
+
+         }
+      }
+      .list__films {
+         margin: 40px 0 0 0;
+         overflow-y: auto;
+         max-height: 500px;
+         @media (max-width: 428px) {
+            margin: 20px 0 0 0;
+         }
+         ol {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            .film {
+               padding: 24px 20px;
+               width: 100%;
+               height: 71px;
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               background: $color-background-film;
+               border-radius: 10px;
+               transition: $transition;
+               @media (max-width: 540px) {
+                  font-size: 18px;
+               }
+               @media (max-width: 428px) {
+                  padding: 15px;
+                  height: 60px;
+                  font-size: 15px;
+               }
+               .film__inner {
+                  display: flex;
+                  align-items: center;
+                  gap: 20px;
+                  @media (max-width: 428px) {
+                     max-width: 265px;
+                     gap: 10px;
+                  }
+                  .film__checkbox {
+                     display: none;
+                  }
+                  .fake__checkbox {
+                     width: 20px;
+                     height: 20px;
+                     border: 1px solid $color-checkbox;
+                     border-radius: 20px;
+                     position: relative;
+                     &::before {
+                        content: '';
+                        width: 17px;
+                        height: 17px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%) scale(0);
+                        background: $color-background-btn;
+                        border-radius: 20px;
+                        opacity: 0;
+                        transition: $transition;
+                     }
+                  }
+                  .film__checkbox:checked + .fake__checkbox::before {
+                     opacity: 1;
+                     transform: translate(-50%, -50%) scale(1);
+                  }
+                  .film__checkbox:checked ~ .film__name {
+                     text-decoration: line-through;
+                  }
+                  .film__name {
+                     line-height: 23px;
+                     color: $color-font;
+                     letter-spacing: -0.02em;
+                     transition: $transition;
+                     &::first-letter {
+                        text-transform: uppercase;
+                     }
+                  }
+               }
+               .film__btn {
+                  width: 23px;
+                  height: 23px;
+                  background: url('../../Img/icon/close.svg');
+                  cursor: pointer;
+               }
+               &:has(> .film__inner > .film__checkbox:checked) {
+                  opacity: .3;
+               }
+            }
+         }
+      }
+   }
+}
+

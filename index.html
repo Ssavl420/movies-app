@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+   <title>Список фильмов</title>
+   <meta charset="UTF-8">
+   <!-- Настройки адаптивности страницы -->
+   <!-- Фиксированная ширина (ширину берем из дизайн макета) -->
+   <!-- <meta name="viewport" content="width=1200"> -->
+   <!-- Адаптивность -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+   <meta name="format-detection" content="telephone=no">
+   <meta name="description" content="Приложение список фильмов">
+   <meta name="keywords" content="Приложение список фильмов">
+   <!-- Управление доступом поисковых роботов к странице -->
+   <!-- <meta name="robots" content="" -->
+   <!-- Запрет индексации страницы полностью -->
+   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+   <meta name="robots" content="none">
+   <meta name="Author" content="Savlevich Sergey">
+   <meta name="Copyright" content="Savlevich Sergey">
+   <meta name="Address" content="planet: Earth">
+   <meta http-equiv="refresh" content="; url=index.html">
+   <meta property="og:locale" content="ru_RU">
+   <meta property="og:type" content="article">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta property="og:title" content="List of films">
+   <meta name="twitter:title" content="List of films">
+   <meta property="og:description" content="Список фильмов">
+   <meta property="og:image" content="Img/logo/01.png">
+   <meta property="twitter:image" content="Img/logo/01.png">
+   <meta property="og:url" content="https://savlevich.ru/films">
+   <meta property="og:site_name" content="Blog App">
+   <link rel="icon" href="./Img/favicon.png" type="image/x-icon">
+   <link rel="stylesheet" href="Source/css/index.css">
+</head>
+
+<body>
+   <header>
+      <div class="container">
+         <div class="header__inner">
+            <div class="header__btn-wrap">
+               <p class="header__btn">Список фильмов</p>
+               <p class="header__btn">2023</p>
+            </div>
+            <h1 class="title">Посмотреть</h1>
+         </div>
+      </div>
+   </header>
+   <main>
+      <div class="container">
+         <div class="main__inner">
+            <form action="" method="post" autocomplete="off">
+               <input id="movieTitle" class="movie__input" type="text" name="movieTitle" placeholder="Добавить фильм">
+               <button id="movieBtn" type="submit" class="input__btn"></button>
+            </form>
+            <div class="list__films">
+               <ol id="listFilms">
+                  <!-- <li class="film">
+                     <label class="film__inner">
+                        <input class="film__checkbox" type="checkbox">
+                        <span class="fake__checkbox"></span>
+                        <span class="film__name">Поймай меня, если сможешь</span>
+                     </label>
+                     <div class="film__btn"></div>
+                  </li> -->
+               </ol>
+            </div>
+         </div>
+      </div>
+   </main>
+   <script src="Js/script.js"></script>
+</body>
+
+</html>

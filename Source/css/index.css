@@ -1,0 +1,331 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Arimo:regular,500,600,700,italic,500italic,600italic,700italic); /*Обнуляющие стили*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+} /*Крестик в поле input браузера IE отключен*/
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+} /*Отступы кнопок браузера Firefox 0*/
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*----------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 auto;
+  font-family: "Arimo";
+  font-size: 20px;
+  font-weight: 400;
+  color: #f3f6f9;
+  background: #181818;
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+  max-width: 960px;
+}
+
+header {
+  margin: 80px auto 0;
+  padding: 0 0 0 74px;
+}
+@media (max-width: 540px) {
+  header {
+    padding: 0 0 0 34px;
+  }
+}
+@media (max-width: 428px) {
+  header {
+    padding: 0 0 0 14px;
+  }
+}
+header .header__inner {
+  display: flex;
+  flex-direction: column;
+}
+header .header__inner .header__btn-wrap {
+  height: 30px;
+  display: flex;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+}
+header .header__inner .header__btn-wrap .header__btn {
+  padding: 0 22px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #6532F8;
+  text-transform: uppercase;
+  border: 1px solid #6532F8;
+  border-radius: 200px;
+}
+header .header__inner .title {
+  font-size: 120px;
+  line-height: 138px;
+  letter-spacing: -0.04em;
+}
+@media (max-width: 754px) {
+  header .header__inner .title {
+    font-size: 90px;
+    line-height: 103px;
+  }
+}
+@media (max-width: 640px) {
+  header .header__inner .title {
+    font-size: 70px;
+    line-height: 80px;
+  }
+}
+@media (max-width: 540px) {
+  header .header__inner .title {
+    font-size: 50px;
+    line-height: 57px;
+  }
+}
+@media (max-width: 428px) {
+  header .header__inner .title {
+    padding: 10px 0 0 0;
+    font-size: 30px;
+    line-height: 34px;
+  }
+}
+
+main {
+  height: 100%;
+}
+main .main__inner {
+  margin: 15px 0 0 0;
+  padding: 86px 70px;
+  height: 100%;
+  background: #232323;
+  border-radius: 20px;
+}
+@media (max-width: 640px) {
+  main .main__inner {
+    padding: 56px 46px;
+  }
+}
+@media (max-width: 540px) {
+  main .main__inner {
+    padding: 36px 30px;
+  }
+}
+@media (max-width: 428px) {
+  main .main__inner {
+    padding: 15px;
+  }
+}
+main .main__inner form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 428px) {
+  main .main__inner form {
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+main .main__inner form .movie__input {
+  width: 411px;
+  height: 62px;
+  font-size: 30px;
+  line-height: 34px;
+  color: rgba(243, 246, 249, 0.5);
+  background: #232323;
+  border-bottom: 1px solid rgba(243, 246, 249, 0.5);
+}
+@media (max-width: 640px) {
+  main .main__inner form .movie__input {
+    width: 70%;
+    font-size: 25px;
+    line-height: 28px;
+  }
+}
+@media (max-width: 428px) {
+  main .main__inner form .movie__input {
+    width: 85%;
+    height: 42px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+main .main__inner form .input__btn {
+  width: 62px;
+  height: 62px;
+  background: url("../../Img/icon/arrow.svg") center no-repeat, #6532F8;
+  border-radius: 50%;
+}
+@media (max-width: 428px) {
+  main .main__inner form .input__btn {
+    width: 42px;
+    height: 42px;
+    background-size: 50%;
+  }
+}
+main .main__inner .list__films {
+  margin: 40px 0 0 0;
+  overflow-y: auto;
+  max-height: 500px;
+}
+@media (max-width: 428px) {
+  main .main__inner .list__films {
+    margin: 20px 0 0 0;
+  }
+}
+main .main__inner .list__films ol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+main .main__inner .list__films ol .film {
+  padding: 24px 20px;
+  width: 100%;
+  height: 71px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3A3939;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+@media (max-width: 540px) {
+  main .main__inner .list__films ol .film {
+    font-size: 18px;
+  }
+}
+@media (max-width: 428px) {
+  main .main__inner .list__films ol .film {
+    padding: 15px;
+    height: 60px;
+    font-size: 15px;
+  }
+}
+main .main__inner .list__films ol .film .film__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 428px) {
+  main .main__inner .list__films ol .film .film__inner {
+    max-width: 265px;
+    gap: 10px;
+  }
+}
+main .main__inner .list__films ol .film .film__inner .film__checkbox {
+  display: none;
+}
+main .main__inner .list__films ol .film .film__inner .fake__checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(243, 246, 249, 0.3);
+  border-radius: 20px;
+  position: relative;
+}
+main .main__inner .list__films ol .film .film__inner .fake__checkbox::before {
+  content: "";
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #6532F8;
+  border-radius: 20px;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+main .main__inner .list__films ol .film .film__inner .film__checkbox:checked + .fake__checkbox::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+main .main__inner .list__films ol .film .film__inner .film__checkbox:checked ~ .film__name {
+  text-decoration: line-through;
+}
+main .main__inner .list__films ol .film .film__inner .film__name {
+  line-height: 23px;
+  color: #f3f6f9;
+  letter-spacing: -0.02em;
+  transition: all 0.4s ease;
+}
+main .main__inner .list__films ol .film .film__inner .film__name::first-letter {
+  text-transform: uppercase;
+}
+main .main__inner .list__films ol .film .film__btn {
+  width: 23px;
+  height: 23px;
+  background: url("../../Img/icon/close.svg");
+  cursor: pointer;
+}
+main .main__inner .list__films ol .film:has(> .film__inner > .film__checkbox:checked) {
+  opacity: 0.3;
+}/*# sourceMappingURL=index.css.map */
