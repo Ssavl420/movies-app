@@ -85,6 +85,11 @@ body {
   background: #181818;
   overflow: hidden;
 }
+@media (orientation: landscape) {
+  body {
+    overflow: auto;
+  }
+}
 
 .container {
   margin: 0 auto;

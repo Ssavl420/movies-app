@@ -21,6 +21,9 @@ body {
    color: $color-font;
    background: $color-background;
    overflow: hidden;
+   @media (orientation: landscape) {
+      overflow: auto;
+   }
 }
 .container {
    margin: 0 auto;
