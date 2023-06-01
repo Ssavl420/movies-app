@@ -121,6 +121,8 @@ main {
             color: $color-font-opacity;
             background: $color-background-form;
             border-bottom: 1px solid $color-font-opacity;
+            -webkit-appearance: none;
+            -webkit-border-radius: 0;
             @media (max-width: 640px) {
                width: 70%;
                font-size: 25px;

@@ -205,6 +205,8 @@ main .main__inner form .movie__input {
   color: rgba(243, 246, 249, 0.5);
   background: #232323;
   border-bottom: 1px solid rgba(243, 246, 249, 0.5);
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 @media (max-width: 640px) {
   main .main__inner form .movie__input {
