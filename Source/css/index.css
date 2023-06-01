@@ -85,7 +85,7 @@ body {
   background: #181818;
   overflow: hidden;
 }
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 428px) {
   body {
     overflow: auto;
   }
@@ -164,9 +164,6 @@ header .header__inner .title {
   }
 }
 
-main {
-  height: 100%;
-}
 main .main__inner {
   margin: 15px 0 0 0;
   padding: 86px 70px;
