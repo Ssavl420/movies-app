@@ -250,7 +250,8 @@ main .main__inner .list__films ol {
 main .main__inner .list__films ol .film {
   padding: 24px 20px;
   width: 100%;
-  height: 71px;
+  min-height: 71px;
+  overflow-wrap: anywhere;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -266,11 +267,12 @@ main .main__inner .list__films ol .film {
 @media (max-width: 428px) {
   main .main__inner .list__films ol .film {
     padding: 15px;
-    height: 60px;
+    min-height: 60px;
     font-size: 15px;
   }
 }
 main .main__inner .list__films ol .film .film__inner {
+  max-width: 95%;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -285,11 +287,12 @@ main .main__inner .list__films ol .film .film__inner .film__checkbox {
   display: none;
 }
 main .main__inner .list__films ol .film .film__inner .fake__checkbox {
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   border: 1px solid rgba(243, 246, 249, 0.3);
   border-radius: 20px;
   position: relative;
+  cursor: pointer;
 }
 main .main__inner .list__films ol .film .film__inner .fake__checkbox::before {
   content: "";
@@ -321,8 +324,8 @@ main .main__inner .list__films ol .film .film__inner .film__name::first-letter {
   text-transform: uppercase;
 }
 main .main__inner .list__films ol .film .film__btn {
-  width: 23px;
-  height: 23px;
+  min-width: 23px;
+  min-height: 23px;
   background: url("../../Img/icon/close.svg");
   cursor: pointer;
 }
