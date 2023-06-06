@@ -16,18 +16,18 @@ addBtn.addEventListener('click', function(e) {
    start()
 });
 // Сохранение по клику на чекбокс значения checkbox в localStorage или удаление фильма
-movieList.addEventListener ('click', (event) => {
-   if (event.target.classList.contains('film__checkbox')) {
-      if (movies[event.target.id].checkbox === 'unchecked') {movies[event.target.id].checkbox = 'checked'}
-      else {movies[event.target.id].checkbox = 'unchecked'}
-      recLS()
-   } 
-   else if (event.target.classList.contains('film__btn')) {
-      movies.splice(event.target.id,1)
-      recLS()
-      showMovieList();
-   }
-});
+// movieList.addEventListener ('click', (event) => {
+//    if (event.target.classList.contains('film__checkbox')) {
+//       if (movies[event.target.id].checkbox === 'unchecked') {movies[event.target.id].checkbox = 'checked'}
+//       else {movies[event.target.id].checkbox = 'unchecked'}
+//       recLS('movies', movies)
+//    } 
+//    if (event.target.classList.contains('film__btn')) {
+//       removeObject(movies)
+//       recLS('movies', movies)
+//       showMovieList();
+//    }
+// });
 
 showMovieList();
 //=======================================================================================
@@ -36,65 +36,136 @@ showMovieList();
 function start() {
    const title = input.value;
    let checkbox = 'unchecked';
-   createMovie(title, checkbox);
-   clearInput();
-   recLS();
+   createMovie(movies, title, checkbox);
+   clearValue(input);
+   recLS('movies', movies);
    showMovieList();
 }
 
 // Создание объекта "фильм"
-function createMovie(title, checkbox) {
+function createMovie(array, title, checkbox) {
    const movie = {
       title: title,
       checkbox: checkbox,
    }
-   movies.unshift(movie);
+   array.unshift(movie);
    return movie;
 };
 
 // Очищение поля input
-function clearInput() {
-   input.value = null;
+function clearValue(element) {
+   element.value = null;
 };
 
 // Проверка массива
-function checkArray() {
-   if (!LS.getItem('movies') == []) {movies = readLS()}
-   else {movies = []}
-   return movies;
+function checkArray(key, array) {
+   if (!LS.getItem(key) == []) {movies = readLS(key)}
+   else {array = []}
+   return array;
 };
 
 // Отрисовка movieList
-function renderMovieList() {
-   let movieListHTML = '';
+// function renderMovieList(array) {
+//    let movieListHTML = '';
    
-   for (let i = 0; i < movies.length; i++) {
-      movieListHTML += `
-         <li id="${i}" class="film">
-            <label class="film__inner">
-               <input id="${i}" class="film__checkbox" type="checkbox" ${movies[i].checkbox}>
-               <span class="fake__checkbox"></span>
-               <span class="film__name">${movies[i].title}</span>
-            </label>
-            <div id="${i}" class="film__btn" title="Удалить"></div>
-         </li>
-      `
+//    for (let i = 0; i < array.length; i++) {
+//       movieListHTML += `
+//          <li id="${i}" class="film">
+//             <label class="film__inner">
+//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
+//                <span class="fake__checkbox"></span>
+//                <span class="film__name">${array[i].title}</span>
+//             </label>
+//             <div id="${i}" class="film__btn" title="Удалить"></div>
+//          </li>
+//       `
+//    }
+//    movieList.innerHTML = movieListHTML;
+// };
+
+// Отрисовка movieList
+function renderMovieList(array) {
+   movieList.innerHTML = '';
+   for (let i = 0; i < array.length; i++) {
+
+      let li = document.createElement('li');
+      li.className = 'film';
+      li.setAttribute('id', i);
+      movieList.appendChild(li);
+
+      let label = document.createElement('label')
+      label.classList = 'film__inner';
+      li.appendChild(label);
+
+      let input = document.createElement('input');
+      input.className = 'film__checkbox';
+      input.setAttribute('id', i);
+      input.setAttribute('type', 'checkbox');
+      input.setAttribute(`${array[i].checkbox}`, '')
+      input.addEventListener('click', () => {
+         if (array[event.target.id].checkbox === 'unchecked') {array[event.target.id].checkbox = 'checked'}
+         else {array[event.target.id].checkbox = 'unchecked'}
+         recLS('movies', array)
+      })
+      label.appendChild(input);
+      
+      let span = document.createElement('span')
+      span.className = 'fake__checkbox';
+      label.appendChild(span);
+
+      let spanText = document.createElement('span')
+      spanText.className = 'film__name';
+      spanText.innerHTML = `${array[i].title}`;
+      label.appendChild(spanText);
+
+      let div = document.createElement('div');
+      div.className = 'film__btn';
+      div.setAttribute('id', i)
+      div.setAttribute('title', 'Удалить');
+      div.addEventListener('click', () => {
+         array.splice(event.target.id,1)
+         recLS('movies', array);
+         renderMovieList(array);
+      })
+      li.appendChild(div);
    }
-   movieList.innerHTML = movieListHTML;
 };
 
 // Вывод movieList
 function showMovieList() {
-   checkArray()
+   checkArray('movies', movies)
    renderMovieList(movies)
 };
 
 // Запись данных в localStorage
-function recLS() {
-   return LS.setItem('movies', JSON.stringify(movies))
+function recLS(key, value) {
+   return LS.setItem(key, JSON.stringify(value))
 };
 
 // Чтение данных в localStorage
-function readLS() {
-   return JSON.parse(LS.getItem('movies'))
+function readLS(key) {
+   return JSON.parse(LS.getItem(key))
 };
+
+// Удаление элемента "Фильм" из списка
+function removeObject(arr) {
+   arr.splice(event.target.id,1)
+}
+//-------------------------------------------------------------------------------------------------
+// function createElement (tag, className, id = '', text = '') {
+//    tag = document.createElement(tag);
+//    tag.setAttribute('class', className)
+//    tag.setAttribute('id', id)
+//    tag.innerText = text;
+
+//    return tag;
+// }
+// function createInputElement (tag, className, id = '', type = '') {
+//    tag = document.createElement(tag);
+//    tag.setAttribute('class', className)
+//    tag.setAttribute('id', id)
+//    tag.setAttribute('type', type)
+
+//    return tag;
+// }
+
