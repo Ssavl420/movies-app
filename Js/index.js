@@ -4,6 +4,7 @@ const movieList = document.querySelector('#listFilms')
 const addBtn = document.querySelector('#movieBtn')
 
 const LS = localStorage;
+const MOVIES_STORAGE_LABEL = 'movies';
 
 let movies = [];
 let movie = {};
@@ -105,7 +106,7 @@ function renderMovieList(array) {
       input.addEventListener('click', () => {
          if (array[event.target.id].checkbox === 'unchecked') {array[event.target.id].checkbox = 'checked'}
          else {array[event.target.id].checkbox = 'unchecked'}
-         recLS('movies', array)
+         recLS(MOVIES_STORAGE_LABEL, array)
       })
       label.appendChild(input);
       
@@ -124,7 +125,7 @@ function renderMovieList(array) {
       div.setAttribute('title', 'Удалить');
       div.addEventListener('click', () => {
          array.splice(event.target.id,1)
-         recLS('movies', array);
+         recLS(MOVIES_STORAGE_LABEL, array);
          renderMovieList(array);
       })
       li.appendChild(div);
