@@ -16,19 +16,6 @@ addBtn.addEventListener('click', function(e) {
    if (!input.value ||  input.value.trim() == "") {clearValue(input); return null}
    start()
 });
-// Сохранение по клику на чекбокс значения checkbox в localStorage или удаление фильма
-// movieList.addEventListener ('click', (event) => {
-//    if (event.target.classList.contains('film__checkbox')) {
-//       if (movies[event.target.id].checkbox === 'unchecked') {movies[event.target.id].checkbox = 'checked'}
-//       else {movies[event.target.id].checkbox = 'unchecked'}
-//       recLS('movies', movies)
-//    } 
-//    if (event.target.classList.contains('film__btn')) {
-//       removeObject(movies)
-//       recLS('movies', movies)
-//       showMovieList();
-//    }
-// });
 
 showMovieList();
 //=======================================================================================
@@ -43,19 +30,10 @@ function start() {
    showMovieList();
 }
 
-// Создание объекта "фильм"
-function createMovie(array, title, checkbox) {
-   const movie = {
-      title: title,
-      checkbox: checkbox,
-   }
-   array.unshift(movie);
-   return movie;
-};
-
-// Очищение поля input
-function clearValue(element) {
-   element.value = null;
+// Вывод movieList
+function showMovieList() {
+   checkArray('movies', movies)
+   renderMovieList(movies)
 };
 
 // Проверка массива
@@ -63,25 +41,6 @@ function checkArray(key, array) {
    if (!LS.getItem(key) == []) {movies = readLS(key)}
    else {array = []}
    return array;
-};
-
-// Отрисовка movieList
-function renderMovieList(array) {
-   let movieListHTML = '';
-   
-   for (let i = 0; i < array.length; i++) {
-      movieListHTML += `
-         <li id="${i}" class="film">
-            <label class="film__inner">
-               <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
-               <span class="fake__checkbox"></span>
-               <span class="film__name">${array[i].title}</span>
-            </label>
-            <div id="${i}" class="film__btn" title="Удалить"></div>
-         </li>
-      `
-   }
-   movieList.innerHTML = movieListHTML;
 };
 
 // Отрисовка movieList
@@ -132,10 +91,19 @@ function renderMovieList(array) {
    }
 };
 
-// Вывод movieList
-function showMovieList() {
-   checkArray('movies', movies)
-   renderMovieList(movies)
+// Создание объекта "фильм"
+function createMovie(array, title, checkbox) {
+   const movie = {
+      title: title,
+      checkbox: checkbox,
+   }
+   array.unshift(movie);
+   return movie;
+};
+
+// Очищение поля input
+function clearValue(element) {
+   element.value = null;
 };
 
 // Запись данных в localStorage
@@ -148,11 +116,45 @@ function readLS(key) {
    return JSON.parse(LS.getItem(key))
 };
 
-// Удаление элемента "Фильм" из списка
+// Удаление элемента из списка
 function removeObject(arr) {
    arr.splice(event.target.id,1)
 }
 //-------------------------------------------------------------------------------------------------
+
+// Отрисовка movieList
+// function renderMovieList(array) {
+//    let movieListHTML = '';
+//
+//    for (let i = 0; i < array.length; i++) {
+//       movieListHTML += `
+//          <li id="${i}" class="film">
+//             <label class="film__inner">
+//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
+//                <span class="fake__checkbox"></span>
+//                <span class="film__name">${array[i].title}</span>
+//             </label>
+//             <div id="${i}" class="film__btn" title="Удалить"></div>
+//          </li>
+//       `
+//    }
+//    movieList.innerHTML = movieListHTML;
+// };
+
+// Сохранение по клику на чекбокс значения checkbox в localStorage или удаление фильма
+// movieList.addEventListener ('click', (event) => {
+//    if (event.target.classList.contains('film__checkbox')) {
+//       if (movies[event.target.id].checkbox === 'unchecked') {movies[event.target.id].checkbox = 'checked'}
+//       else {movies[event.target.id].checkbox = 'unchecked'}
+//       recLS('movies', movies)
+//    } 
+//    if (event.target.classList.contains('film__btn')) {
+//       removeObject(movies)
+//       recLS('movies', movies)
+//       showMovieList();
+//    }
+// });
+
 // function createElement (tag, className, id = '', text = '') {
 //    tag = document.createElement(tag);
 //    tag.setAttribute('class', className)
