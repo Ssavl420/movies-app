@@ -14,88 +14,88 @@ let movie = {};
 addBtn.addEventListener('click', function(e) {
    e.preventDefault();
    if (!input.value ||  input.value.trim() == "") {clearValue(input); return null}
-   start()
+   init()
 });
 
-showMovieList();
+renderMovieList();
 //=======================================================================================
 
 // Запуск: чтение инпута, создание объекта, запись в LS, показ данных
-function start() {
+function init() {
    const title = input.value;
-   let checkbox = 'unchecked';
-   createMovie(movies, title, checkbox);
+   let checkboxValue = 'unchecked';
+   createMovie(movies, title, checkboxValue);
    clearValue(input);
-   recLS('movies', movies);
-   showMovieList();
+   recLS(MOVIES_STORAGE_LABEL, movies);
+   renderMovieList();
 }
 
 // Вывод movieList
-function showMovieList() {
-   checkArray('movies', movies)
-   renderMovieList(movies)
+function renderMovieList() {
+   getArray(MOVIES_STORAGE_LABEL, movies)
+   renderMovieItem(movies)
 };
 
-// Проверка массива
-function checkArray(key, array) {
+// Получение массива
+function getArray(key, array) {
    if (!LS.getItem(key) == []) {movies = readLS(key)}
    else {array = []}
    return array;
 };
 
-// Отрисовка movieList
-function renderMovieList(array) {
+// Отрисовка movieItem
+function renderMovieItem(array) {
    movieList.innerHTML = '';
    for (let i = 0; i < array.length; i++) {
 
-      let li = document.createElement('li');
-      li.className = 'film';
-      li.setAttribute('id', i);
-      movieList.appendChild(li);
+      let film = document.createElement('li');
+      film.className = 'film';
+      film.setAttribute('id', i);
+      movieList.appendChild(film);
 
-      let label = document.createElement('label')
-      label.classList = 'film__inner';
-      li.appendChild(label);
+      let filmInner = document.createElement('label')
+      filmInner.classList = 'film__inner';
+      film.appendChild(filmInner);
 
-      let input = document.createElement('input');
-      input.className = 'film__checkbox';
-      input.setAttribute('id', i);
-      input.setAttribute('type', 'checkbox');
-      input.setAttribute(`${array[i].checkbox}`, '')
-      input.addEventListener('click', () => {
-         if (array[event.target.id].checkbox === 'unchecked') {array[event.target.id].checkbox = 'checked'}
-         else {array[event.target.id].checkbox = 'unchecked'}
+      let filmCheckbox = document.createElement('input');
+      filmCheckbox.className = 'film__checkbox';
+      filmCheckbox.setAttribute('id', i);
+      filmCheckbox.setAttribute('type', 'checkbox');
+      filmCheckbox.setAttribute(`${array[i].checkboxValue}`, '')
+      filmCheckbox.addEventListener('click', () => {
+         if (array[i].checkboxValue === 'unchecked') {array[i].checkboxValue = 'checked', console.log(array[i].checkboxValue)}
+         else {array[i].checkboxValue = 'unchecked', console.log(array[i].checkboxValue)}
          recLS(MOVIES_STORAGE_LABEL, array)
       })
-      label.appendChild(input);
+      filmInner.appendChild(filmCheckbox);
       
-      let span = document.createElement('span')
-      span.className = 'fake__checkbox';
-      label.appendChild(span);
+      let fakeCheckbox = document.createElement('span')
+      fakeCheckbox.className = 'fake__checkbox';
+      filmInner.appendChild(fakeCheckbox);
 
-      let spanText = document.createElement('span')
-      spanText.className = 'film__name';
-      spanText.innerHTML = `${array[i].title}`;
-      label.appendChild(spanText);
+      let filmName = document.createElement('span')
+      filmName.className = 'film__name';
+      filmName.innerHTML = `${array[i].title}`;
+      filmInner.appendChild(filmName);
 
-      let div = document.createElement('div');
-      div.className = 'film__btn';
-      div.setAttribute('id', i)
-      div.setAttribute('title', 'Удалить');
-      div.addEventListener('click', () => {
-         array.splice(event.target.id,1)
+      let filmBtn = document.createElement('div');
+      filmBtn.className = 'film__btn';
+      filmBtn.setAttribute('id', i)
+      filmBtn.setAttribute('title', 'Удалить');
+      filmBtn.addEventListener('click', () => {
+         removeFilm(array, i);
          recLS(MOVIES_STORAGE_LABEL, array);
-         renderMovieList(array);
+         renderMovieItem(array);
       })
-      li.appendChild(div);
+      film.appendChild(filmBtn);
    }
 };
 
 // Создание объекта "фильм"
-function createMovie(array, title, checkbox) {
+function createMovie(array, title, checkboxValue) {
    const movie = {
       title: title,
-      checkbox: checkbox,
+      checkboxValue: checkboxValue,
    }
    array.unshift(movie);
    return movie;
@@ -111,26 +111,26 @@ function recLS(key, value) {
    return LS.setItem(key, JSON.stringify(value))
 };
 
-// Чтение данных в localStorage
+// Чтение данных из localStorage
 function readLS(key) {
    return JSON.parse(LS.getItem(key))
 };
 
 // Удаление элемента из списка
-function removeObject(arr) {
-   arr.splice(event.target.id,1)
+function removeFilm(array, i) {
+   array.splice(i,1)
 }
 //-------------------------------------------------------------------------------------------------
 
 // Отрисовка movieList
-// function renderMovieList(array) {
+// function renderMovieItem(array) {
 //    let movieListHTML = '';
 //
 //    for (let i = 0; i < array.length; i++) {
 //       movieListHTML += `
 //          <li id="${i}" class="film">
 //             <label class="film__inner">
-//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
+//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkboxValue}>
 //                <span class="fake__checkbox"></span>
 //                <span class="film__name">${array[i].title}</span>
 //             </label>
@@ -144,14 +144,14 @@ function removeObject(arr) {
 // Сохранение по клику на чекбокс значения checkbox в localStorage или удаление фильма
 // movieList.addEventListener ('click', (event) => {
 //    if (event.target.classList.contains('film__checkbox')) {
-//       if (movies[event.target.id].checkbox === 'unchecked') {movies[event.target.id].checkbox = 'checked'}
-//       else {movies[event.target.id].checkbox = 'unchecked'}
-//       recLS('movies', movies)
+//       if (movies[event.target.id].checkboxValue === 'unchecked') {movies[event.target.id].checkboxValue = 'checked'}
+//       else {movies[event.target.id].checkboxValue = 'unchecked'}
+//       recLS(MOVIES_STORAGE_LABEL, movies)
 //    } 
 //    if (event.target.classList.contains('film__btn')) {
-//       removeObject(movies)
-//       recLS('movies', movies)
-//       showMovieList();
+//       removeFilm(movies)
+//       recLS(MOVIES_STORAGE_LABEL, movies)
+//       renderMovieList();
 //    }
 // });
 
