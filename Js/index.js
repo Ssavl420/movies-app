@@ -66,23 +66,23 @@ function checkArray(key, array) {
 };
 
 // Отрисовка movieList
-// function renderMovieList(array) {
-//    let movieListHTML = '';
+function renderMovieList(array) {
+   let movieListHTML = '';
    
-//    for (let i = 0; i < array.length; i++) {
-//       movieListHTML += `
-//          <li id="${i}" class="film">
-//             <label class="film__inner">
-//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
-//                <span class="fake__checkbox"></span>
-//                <span class="film__name">${array[i].title}</span>
-//             </label>
-//             <div id="${i}" class="film__btn" title="Удалить"></div>
-//          </li>
-//       `
-//    }
-//    movieList.innerHTML = movieListHTML;
-// };
+   for (let i = 0; i < array.length; i++) {
+      movieListHTML += `
+         <li id="${i}" class="film">
+            <label class="film__inner">
+               <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkbox}>
+               <span class="fake__checkbox"></span>
+               <span class="film__name">${array[i].title}</span>
+            </label>
+            <div id="${i}" class="film__btn" title="Удалить"></div>
+         </li>
+      `
+   }
+   movieList.innerHTML = movieListHTML;
+};
 
 // Отрисовка movieList
 function renderMovieList(array) {
