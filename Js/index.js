@@ -13,7 +13,7 @@ let movie = {};
 // Сохранение данных из input в localStorage
 addBtn.addEventListener('click', function(e) {
    e.preventDefault();
-   if (!input.value ||  input.value.trim() == "") {clearValue(input); return null}
+   if (!input.value ||  input.value.trim() == "" || input.value == "ㅤ") {clearValue(input); return null}
    init()
 });
 
