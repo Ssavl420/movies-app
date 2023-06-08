@@ -1,4 +1,4 @@
-const input = document.querySelector('.movie__input');
+const input = document.querySelector('#movieTitle');
 const movieList = document.querySelector('#listFilms')
 
 const addBtn = document.querySelector('#movieBtn')
@@ -15,6 +15,7 @@ addBtn.addEventListener('click', function(e) {
    e.preventDefault();
    if (!input.value ||  input.value.trim() == "" || input.value == "ㅤ") {clearValue(input); return null}
    init()
+   input.focus();
 });
 
 renderMovieList();

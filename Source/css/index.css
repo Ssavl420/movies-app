@@ -74,6 +74,23 @@ h1, h2, h3, h4, h5, h6 {
 /*----------------------*/
 html {
   scroll-behavior: smooth;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+html ::-webkit-scrollbar {
+  width: 15px;
+}
+html ::-webkit-scrollbar-track {
+  background: transparent;
+}
+html ::-webkit-scrollbar-thumb {
+  background: rgba(243, 246, 249, 0.3);
+  border-radius: 10px;
+}
+html ::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 body {
