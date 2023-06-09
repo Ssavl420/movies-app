@@ -39,7 +39,7 @@ function validation(form) {
    let result = true;
 
    const allInputs = form.querySelectorAll('input');
-   const pattern = /[^а-яА-ЯёЁa-zA-Z0-9\.\,\:\!\?\(\)\/]+/g;
+   const pattern = /[^а-яА-ЯёЁa-zA-Z0-9\s]\.\,\:\!\?\(\)\/]+/g;
 
    for (const input of allInputs) {
       removeError(input);
