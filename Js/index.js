@@ -39,7 +39,7 @@ function validation(form) {
    let result = true;
 
    const allInputs = form.querySelectorAll('input');
-   const pattern = /[^а-яА-ЯёЁa-zA-Z0-9\.\,\:\!\?\/]+/g;
+   const pattern = /[^а-яА-ЯёЁa-zA-Z0-9\.\,\:\!\?\(\)\/]+/g;
 
    for (const input of allInputs) {
       removeError(input);
@@ -75,7 +75,7 @@ function addBtnHandler(event) {
 
    const title = input.value;
    let checkboxValue = 'unchecked';
-   
+
    createMovie(title, checkboxValue);
    clearValue(input);
    recLS(MOVIES_STORAGE_LABEL, movies);
