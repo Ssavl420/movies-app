@@ -65,6 +65,7 @@ function addMovieHandler(event) {
    event.preventDefault();
 
    if (validation(this) == false) {
+      input.focus();
       return null;
    }
 
@@ -80,6 +81,7 @@ function addMovieHandler(event) {
 
 // Вывод movieList
 function renderMovieList() {
+   input.focus();
    getMoviesArray(MOVIES_STORAGE_LABEL, movies)
    renderMovieItem()
 };
@@ -95,6 +97,7 @@ function getMoviesArray(key, array) {
 function renderMovieItem() {
    movieList.innerHTML = '';
    for (let i = 0; i < movies.length; i++) {
+
 
       let film = document.createElement('li');
       let filmInner = document.createElement('label')
@@ -170,54 +173,3 @@ function removeFilm(i) {
    movies.splice(i,1)
 }
 //-------------------------------------------------------------------------------------------------
-
-// Отрисовка movieList
-// function renderMovieItem(array) {
-//    let movieListHTML = '';
-//
-//    for (let i = 0; i < array.length; i++) {
-//       movieListHTML += `
-//          <li id="${i}" class="film">
-//             <label class="film__inner">
-//                <input id="${i}" class="film__checkbox" type="checkbox" ${array[i].checkboxValue}>
-//                <span class="fake__checkbox"></span>
-//                <span class="film__name">${array[i].title}</span>
-//             </label>
-//             <div id="${i}" class="film__btn" title="Удалить"></div>
-//          </li>
-//       `
-//    }
-//    movieList.innerHTML = movieListHTML;
-// };
-
-// Сохранение по клику на чекбокс значения checkbox в localStorage или удаление фильма
-// movieList.addEventListener ('click', (event) => {
-//    if (event.target.classList.contains('film__checkbox')) {
-//       if (movies[event.target.id].checkboxValue === 'unchecked') {movies[event.target.id].checkboxValue = 'checked'}
-//       else {movies[event.target.id].checkboxValue = 'unchecked'}
-//       recLS(MOVIES_STORAGE_LABEL, movies)
-//    } 
-//    if (event.target.classList.contains('film__btn')) {
-//       removeFilm(movies)
-//       recLS(MOVIES_STORAGE_LABEL, movies)
-//       renderMovieList();
-//    }
-// });
-
-// function createElement (tag, className, id = '', text = '') {
-//    tag = document.createElement(tag);
-//    tag.setAttribute('class', className)
-//    tag.setAttribute('id', id)
-//    tag.innerText = text;
-
-//    return tag;
-// }
-// function createInputElement (tag, className, id = '', type = '') {
-//    tag = document.createElement(tag);
-//    tag.setAttribute('class', className)
-//    tag.setAttribute('id', id)
-//    tag.setAttribute('type', type)
-
-//    return tag;
-// }
-
