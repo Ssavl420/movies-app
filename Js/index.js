@@ -2,6 +2,7 @@ const input = document.querySelector('#movieTitle');
 const movieList = document.querySelector('#listFilms')
 
 const addBtn = document.querySelector('#movieBtn')
+const addMovie = document.querySelector('#addMovie')
 
 const LS = localStorage;
 const MOVIES_STORAGE_LABEL = 'movies';
@@ -9,28 +10,77 @@ const MOVIES_STORAGE_LABEL = 'movies';
 let movies = [];
 
 //=======================================================================================
-// addBtn.addEventListener('click', addBtnHandler);
-addBtn.addEventListener('click', validateInput);
+
+addMovie.addEventListener('submit', addBtnHandler)
 
 renderMovieList();
 //=======================================================================================
 
-//
-function validateInput(e) {
-   e.preventDefault();
-   if (!input.value ||  input.value.trim() == "" || input.value == "ㅤ") {clearValue(input); return null}
-   addBtnHandler();
-   input.focus();
-}
+// Валидация формы (инпут)
+function validation(form) {
+
+   function createError(input, text) {
+      const parent = input.parentNode;
+      const errorLabel = document.createElement('label');
+
+      errorLabel.classList.add('error__label');
+      errorLabel.innerText = text;
+      parent.appendChild(errorLabel);
+      parent.classList.add('error');
+   }
+   function removeError(input) {
+      const parent = input.parentNode;
+      if (parent.classList.contains('error')) {
+         parent.querySelector('.error__label').remove()
+         parent.classList.remove('error')
+      }
+   }
+
+   let result = true;
+
+   const allInputs = form.querySelectorAll('input');
+   const pattern = /[^а-яА-ЯёЁa-zA-Z0-9\.\,\:\!\?\/]+/g;
+
+   for (const input of allInputs) {
+      removeError(input);
+      if(input.value == "") {
+         console.log('Ошибка поля ввода'); 
+         createError(input, 'Поле не заполнено')
+         result = false;
+      }
+      if(!input.value == "" && input.value.trim() == "") {
+         console.log('Ошибка поля ввода'); 
+         createError(input, 'Пробел, не фильм')
+         clearValue(input)
+         result = false;
+      }
+      if(!input.value == "" && pattern.test(input.value)) {
+         console.log('Ошибка поля ввода'); 
+         createError(input, 'Недопустимые символы')
+         clearValue(input)
+         result = false;
+      }
+   }
+
+   return result;
+} 
 
 // Запуск: чтение инпута, создание объекта, запись в LS, показ данных
-function addBtnHandler() {
+function addBtnHandler(event) {
+   event.preventDefault();
+
+   if (!validation(this) == true) {
+      return null;
+   }
+
    const title = input.value;
    let checkboxValue = 'unchecked';
+   
    createMovie(title, checkboxValue);
    clearValue(input);
    recLS(MOVIES_STORAGE_LABEL, movies);
    renderMovieList();
+   input.focus();
 }
 
 // Вывод movieList

@@ -133,28 +133,65 @@ main {
             gap: 0;
             justify-content: space-between;
          }
-         .movie__input {
+         .input__box {
             width: 411px;
-            height: 62px;
-            font-size: 30px;
-            line-height: 34px;
-            color: $color-font-opacity;
-            background: $color-background-form;
-            border-bottom: 1px solid $color-font-opacity;
-            -webkit-appearance: none;
-            -webkit-border-radius: 0;
-            @media (max-width: 640px) {
+            @media (max-width: 650px) {
                width: 70%;
-               font-size: 25px;
-               line-height: 28px;
-            }
-            @media (max-width: 540px) {
             }
             @media (max-width: 428px) {
                width: 85%;
-               height: 42px;
-               font-size: 18px;
-               line-height: 22px;
+            }
+            &.error {
+               .movie__input {
+                  &::-webkit-input-placeholder {
+                     // color:    rgb(165, 0, 0);
+                  }
+                  animation: shake .4s;
+                  @keyframes shake {
+                     0% { transform: translate(1px, 1px) rotate(0deg); }
+                     10% { transform: translate(-1px, -2px) rotate(-1deg); }
+                     // 20% { transform: translate(-3px, 0px) rotate(1deg); }
+                     // 30% { transform: translate(3px, 2px) rotate(0deg); }
+                     40% { transform: translate(1px, -1px) rotate(1deg); }
+                     50% { transform: translate(-1px, 2px) rotate(-1deg); }
+                     // 60% { transform: translate(-3px, 1px) rotate(0deg); }
+                     // 70% { transform: translate(3px, 1px) rotate(-1deg); }
+                     80% { transform: translate(-1px, -1px) rotate(1deg); }
+                     90% { transform: translate(1px, 2px) rotate(0deg); }
+                     100% { transform: translate(1px, -2px) rotate(-1deg); }
+                  }
+                  border: none;
+               }
+               .error__label {
+                  margin: -5px 0 0 0;
+                  display: block;
+                  position: fixed;
+                  font-size: 13px;
+                  color: red;
+               }
+            }
+            .movie__input {
+               width: 411px;
+               height: 62px;
+               font-size: 30px;
+               line-height: 34px;
+               color: $color-font-opacity;
+               background: $color-background-form;
+               border-bottom: 1px solid $color-font-opacity;
+               -webkit-appearance: none;
+               -webkit-border-radius: 0;
+               @media (max-width: 640px) {
+                  width: 100%;
+                  font-size: 25px;
+                  line-height: 28px;
+               }
+               @media (max-width: 540px) {
+               }
+               @media (max-width: 428px) {
+                  height: 42px;
+                  font-size: 18px;
+                  line-height: 22px;
+               }
             }
          }
          .input__btn {
