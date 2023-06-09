@@ -1,7 +1,6 @@
 const input = document.querySelector('#movieTitle');
 const movieList = document.querySelector('#listFilms')
 
-const addBtn = document.querySelector('#movieBtn')
 const addMovie = document.querySelector('#addMovie')
 
 const LS = localStorage;
@@ -61,7 +60,6 @@ function validation(form) {
          result = false;
       }
    }
-
    return result;
 } 
 
