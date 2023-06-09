@@ -10,19 +10,22 @@ let movies = [];
 let movie = {};
 
 //=======================================================================================
-// Сохранение данных из input в localStorage
-addBtn.addEventListener('click', function(e) {
-   e.preventDefault();
-   if (!input.value ||  input.value.trim() == "" || input.value == "ㅤ") {clearValue(input); return null}
-   init()
-   input.focus();
-});
+// addBtn.addEventListener('click', addBtnHandler);
+addBtn.addEventListener('click', validateInput);
 
 renderMovieList();
 //=======================================================================================
 
+//
+function validateInput(e) {
+   e.preventDefault();
+   if (!input.value ||  input.value.trim() == "" || input.value == "ㅤ") {clearValue(input); return null}
+   addBtnHandler();
+   input.focus();
+}
+
 // Запуск: чтение инпута, создание объекта, запись в LS, показ данных
-function init() {
+function addBtnHandler() {
    const title = input.value;
    let checkboxValue = 'unchecked';
    createMovie(movies, title, checkboxValue);
@@ -33,12 +36,12 @@ function init() {
 
 // Вывод movieList
 function renderMovieList() {
-   getArray(MOVIES_STORAGE_LABEL, movies)
+   getMoviesArray(MOVIES_STORAGE_LABEL, movies)
    renderMovieItem(movies)
 };
 
 // Получение массива
-function getArray(key, array) {
+function getMoviesArray(key, array) {
    if (!LS.getItem(key) == []) {movies = readLS(key)}
    else {array = []}
    return array;
@@ -50,45 +53,46 @@ function renderMovieItem(array) {
    for (let i = 0; i < array.length; i++) {
 
       let film = document.createElement('li');
-      film.className = 'film';
-      film.setAttribute('id', i);
-      movieList.appendChild(film);
-
       let filmInner = document.createElement('label')
-      filmInner.classList = 'film__inner';
-      film.appendChild(filmInner);
-
       let filmCheckbox = document.createElement('input');
+      let fakeCheckbox = document.createElement('span');
+      let filmName = document.createElement('span');
+      let filmBtn = document.createElement('div');
+
+      film.className = 'film';
+      filmInner.className = 'film__inner';
       filmCheckbox.className = 'film__checkbox';
+      fakeCheckbox.className = 'fake__checkbox';
+      filmName.className = 'film__name';
+      filmBtn.className = 'film__btn';
+
+      film.setAttribute('id', i);
       filmCheckbox.setAttribute('id', i);
       filmCheckbox.setAttribute('type', 'checkbox');
-      filmCheckbox.setAttribute(`${array[i].checkboxValue}`, '')
+      filmCheckbox.setAttribute(`${array[i].checkboxValue}`, '');
+      filmBtn.setAttribute('id', i);
+      filmBtn.setAttribute('title', 'Удалить');
+
+      movieList.appendChild(film);
+      film.appendChild(filmInner);
+      filmInner.appendChild(filmCheckbox);
+      filmInner.appendChild(fakeCheckbox);
+      filmInner.appendChild(filmName);
+      film.appendChild(filmBtn);
+
+      filmName.innerHTML = `${array[i].title}`;
+      
       filmCheckbox.addEventListener('click', () => {
          if (array[i].checkboxValue === 'unchecked') {array[i].checkboxValue = 'checked', console.log(array[i].checkboxValue)}
          else {array[i].checkboxValue = 'unchecked', console.log(array[i].checkboxValue)}
          recLS(MOVIES_STORAGE_LABEL, array)
       })
-      filmInner.appendChild(filmCheckbox);
       
-      let fakeCheckbox = document.createElement('span')
-      fakeCheckbox.className = 'fake__checkbox';
-      filmInner.appendChild(fakeCheckbox);
-
-      let filmName = document.createElement('span')
-      filmName.className = 'film__name';
-      filmName.innerHTML = `${array[i].title}`;
-      filmInner.appendChild(filmName);
-
-      let filmBtn = document.createElement('div');
-      filmBtn.className = 'film__btn';
-      filmBtn.setAttribute('id', i)
-      filmBtn.setAttribute('title', 'Удалить');
       filmBtn.addEventListener('click', () => {
          removeFilm(array, i);
          recLS(MOVIES_STORAGE_LABEL, array);
          renderMovieItem(array);
       })
-      film.appendChild(filmBtn);
    }
 };
 
