@@ -10,7 +10,7 @@ let movies = [];
 
 //=======================================================================================
 
-addMovie.addEventListener('submit', addBtnHandler)
+addMovie.addEventListener('submit', addMovieHandler)
 
 renderMovieList();
 //=======================================================================================
@@ -43,18 +43,15 @@ function validation(form) {
    for (const input of allInputs) {
       removeError(input);
       if(input.value == "") {
-         console.log('Ошибка поля ввода'); 
          createError(input, 'Поле не заполнено')
          result = false;
       }
       if(!input.value == "" && input.value.trim() == "") {
-         console.log('Ошибка поля ввода'); 
          createError(input, 'Пробел, не фильм')
          clearValue(input)
          result = false;
       }
       if(!input.value == "" && pattern.test(input.value)) {
-         console.log('Ошибка поля ввода'); 
          createError(input, 'Недопустимые символы')
          clearValue(input)
          result = false;
@@ -64,10 +61,10 @@ function validation(form) {
 } 
 
 // Запуск: чтение инпута, создание объекта, запись в LS, показ данных
-function addBtnHandler(event) {
+function addMovieHandler(event) {
    event.preventDefault();
 
-   if (!validation(this) == true) {
+   if (validation(this) == false) {
       return null;
    }
 
@@ -130,8 +127,8 @@ function renderMovieItem() {
       filmName.innerHTML = `${movies[i].title}`;
       
       filmCheckbox.addEventListener('click', () => {
-         if (movies[i].checkboxValue === 'unchecked') {movies[i].checkboxValue = 'checked', console.log(movies[i].checkboxValue)}
-         else {movies[i].checkboxValue = 'unchecked', console.log(movies[i].checkboxValue)}
+         if (movies[i].checkboxValue === 'unchecked') {movies[i].checkboxValue = 'checked'}
+         else {movies[i].checkboxValue = 'unchecked'}
          recLS(MOVIES_STORAGE_LABEL, movies)
       })
       
