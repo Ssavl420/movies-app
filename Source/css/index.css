@@ -203,18 +203,18 @@ main .main__inner {
     padding: 15px;
   }
 }
-main .main__inner form {
+main .main__inner .form {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 @media (max-width: 428px) {
-  main .main__inner form {
+  main .main__inner .form {
     gap: 0;
     justify-content: space-between;
   }
 }
-main .main__inner form .movie__input {
+main .main__inner .form .movie__input {
   width: 411px;
   height: 62px;
   font-size: 30px;
@@ -226,28 +226,28 @@ main .main__inner form .movie__input {
   -webkit-border-radius: 0;
 }
 @media (max-width: 640px) {
-  main .main__inner form .movie__input {
+  main .main__inner .form .movie__input {
     width: 70%;
     font-size: 25px;
     line-height: 28px;
   }
 }
 @media (max-width: 428px) {
-  main .main__inner form .movie__input {
+  main .main__inner .form .movie__input {
     width: 85%;
     height: 42px;
     font-size: 18px;
     line-height: 22px;
   }
 }
-main .main__inner form .input__btn {
+main .main__inner .form .input__btn {
   width: 62px;
   height: 62px;
   background: url("../../Img/icon/arrow.svg") center no-repeat, #6532F8;
   border-radius: 50%;
 }
 @media (max-width: 428px) {
-  main .main__inner form .input__btn {
+  main .main__inner .form .input__btn {
     width: 42px;
     height: 42px;
     background-size: 50%;
