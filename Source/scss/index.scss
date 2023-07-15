@@ -219,7 +219,7 @@ main {
             flex-direction: column;
             gap: 3px;
             .film {
-               padding: 24px 20px;
+               padding: 0 20px;
                width: 100%;
                min-height: 71px;
                overflow-wrap: anywhere;
@@ -238,7 +238,8 @@ main {
                   font-size: 15px;
                }
                .film__inner {
-                  max-width: 95%;
+                  padding: 24px 0;
+                  width: 100%;
                   display: flex;
                   align-items: center;
                   gap: 20px;
