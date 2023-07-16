@@ -315,7 +315,7 @@ main .main__inner .list__films ol {
   gap: 3px;
 }
 main .main__inner .list__films ol .film {
-  padding: 24px 20px;
+  padding: 0 20px;
   width: 100%;
   min-height: 71px;
   overflow-wrap: anywhere;
@@ -339,7 +339,8 @@ main .main__inner .list__films ol .film {
   }
 }
 main .main__inner .list__films ol .film .film__inner {
-  max-width: 95%;
+  padding: 24px 0;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 20px;
